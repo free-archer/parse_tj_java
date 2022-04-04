@@ -28,5 +28,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="doParse" layoutX="14.0" layoutY="232.0" mnemonicParsing="false" onAction="#doParse" prefHeight="23.0" prefWidth="392.0" text="Выполнить парсинг">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

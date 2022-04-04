@@ -31,6 +31,14 @@ public class mainController {
     @FXML
     private TextField sqllightFile;
 
+    @FXML
+    private Button doParse;
+
+    @FXML
+    protected void initialize() {
+        System.out.println("initialize");
+
+    }
 
     @FXML
     protected void chooseLogFile(ActionEvent event) {
@@ -58,9 +66,12 @@ public class mainController {
 
 
     @FXML
-    protected void initialize() {
-        System.out.println("initialize");
+    void doParse(ActionEvent event) {
+        Parse parse = new Parse(logFile.getText(), sqllightFile.getText());
 
+        parse.doParse();
     }
+
+
 
 }
