@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.parsetj.parsetj.mainController">
+   <children>
+      <TextField fx:id="logFile" layoutX="14.0" layoutY="90.0" prefHeight="23.0" prefWidth="392.0" promptText="Путь к файлу лога">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="chooseLogFile" layoutX="426.0" layoutY="90.0" mnemonicParsing="false" onAction="#chooseLogFile" prefHeight="26.0" prefWidth="163.0" text="Выбрать файл лога">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="sqllightFile" layoutX="14.0" layoutY="166.0" prefHeight="23.0" prefWidth="392.0" promptText="Путь к файлу SQLight">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="chooseSQLightFile" layoutX="426.0" layoutY="166.0" mnemonicParsing="false" onAction="#chooseSQLightFile" text="Выбрать базу SQLight">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
