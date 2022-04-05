@@ -2,6 +2,7 @@ package org.parsetj.parsetj;
 
 import java.io.File;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -66,7 +67,7 @@ public class mainController {
 
 
     @FXML
-    void doParse(ActionEvent event) {
+    void doParse(ActionEvent event) throws ParseException {
         Parse parse = new Parse(logFile.getText(), sqllightFile.getText());
 
         parse.doParse();
