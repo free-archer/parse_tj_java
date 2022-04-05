@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,11 +19,14 @@ public class Parse {
     private String logFile = "";
     private String dbFile = "";
     private ArrayList<String> mainArray;
-    private Map<String, String> lparams = new HashMap<>();
+    private Map<String, String> mapParams;
+    private List<Map<String, String>> listParam;
 
     Parse(String logFile, String dbFile ) {
         this.logFile = logFile;
         this.dbFile = dbFile;
+
+        listParam = new ArrayList<>();
     }
 
     private String getFileName(String path) {
@@ -51,7 +55,7 @@ public class Parse {
 
             while (line != null) {
                 line = line.strip();
-                System.out.println(line);
+//                System.out.println(line);
 
                 Matcher matcher = pattern.matcher(line);
 
@@ -83,8 +87,12 @@ public class Parse {
             String paramName = matcher.group(1);
             String paramValue = matcher.group(2);
 
-            lparams.put(paramName, paramValue);
+            mapParams.put(paramName, paramValue);
+            // TODO: append_to_dict()
         }
+        String replace = matcher.replaceAll(elem);
+        System.out.println("replace: " + replace);
+
     }
 
     public void doParse() throws ParseException {
@@ -116,6 +124,7 @@ public class Parse {
         }
 
 
+        mapParams = new HashMap<>();
 
         for (String elem : mainArray) {
             strPatern = "(\\d{2}):(\\d{2}).(\\d{6})";
@@ -134,16 +143,22 @@ public class Parse {
             }
             String format = "yyyy-MM-dd HH:mm:ss.SSSSS";
             String stringDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second + "." + msec;
-            SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+            SimpleDateFormat dateFormat =   new SimpleDateFormat(format);
             dateFormat.parse(stringDate);
 
-            lparams.put("time", stringDate);
+            mapParams.put("time", stringDate);
 
             getParams(elem, ",(\\w+)='([^']+)");
+            getParams(elem, ",(\\w+)=\"([^\"]+)");
+            getParams(elem, ",([A-Za-z0-9А-Яа-я:]+)=([^,]+)");
+
+            Map<String, String> newParam = new HashMap<>(mapParams);
+            listParam.add(newParam);
+            mapParams.clear();
 
         }
 
-
+        System.out.println("Размер массива параметров: " + listParam.size());
         long finish = System.currentTimeMillis();
         long elapsed = finish - start;
         System.out.println("Прошло времени, мс: " + elapsed);
